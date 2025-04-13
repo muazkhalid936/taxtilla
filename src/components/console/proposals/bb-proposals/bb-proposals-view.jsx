@@ -5,36 +5,16 @@ import { useUserStore } from "@/stores/userStore";
 
 import apiCaller from "@/lib/apiCaller";
 import {
-  SummaryColumnDef,
   SummaryTable,
 } from "@/components/console/summary-table";
 
-import { Inquiry } from "./columns";
-import GeneralInquiriesTable from "./general-inquiries-table";
+import GeneralInquiriesTable from "./bb-proposals-table";
+import { Proposal } from "./columns";
 
-interface InquirySummary {
-  totalInq?: number;
-  netQty?: number;
-  repliedInq?: number;
-  postedInq?: number;
-  rcvdProp?: number;
-  propAccepted: number;
-  contracted: number;
-}
 
-interface GeneralInquiriesViewProps {
-  selectedInquiries: Inquiry[];
-  setSelectedInquiries: React.Dispatch<React.SetStateAction<Inquiry[]>>;
-}
-
-export default function GeneralInquiriesView({
-  selectedInquiries,
-  setSelectedInquiries,
-}: GeneralInquiriesViewProps) {
+export default function BBProposalsView() {
   const { user } = useUserStore();
-  const user_type = localStorage.getItem("user_type");
-
-  const [data, setData] = useState<Inquiry[]>([]);
+  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -42,7 +22,7 @@ export default function GeneralInquiriesView({
 
     const fetchData = async () => {
       try {
-        const endpoint = "/general/inquiry/";
+        const endpoint = "/general/proposal/";
         const response = await apiCaller(
           endpoint,
           "GET",
@@ -62,12 +42,14 @@ export default function GeneralInquiriesView({
     fetchData();
   }, [user]);
 
+  // If user data is not loaded, show a fallback (or loading indicator)
   if (!user || loading) {
     return <div>Loading user data...</div>;
   }
 
-  const columns: SummaryColumnDef<InquirySummary>[] =
-    user_type === "customer"
+  // Define columns based on the user business type
+  const columns =
+    user.businessType === "customer"
       ? [
           { id: "postedInq", header: "Posted Inq" },
           { id: "rcvdProp", header: "Rcvd Prop" },
@@ -82,8 +64,9 @@ export default function GeneralInquiriesView({
           { id: "contracted", header: "Contracted" },
         ];
 
-  const summary: InquirySummary[] =
-    user_type === "customer"
+  // Build summary data accordingly
+  const summary =
+    user.businessType === "customer"
       ? [
           {
             postedInq: data.length,
@@ -106,12 +89,12 @@ export default function GeneralInquiriesView({
     <div className="space-y-4">
       {/* Summary table on top */}
       <SummaryTable columns={columns} data={summary} maxWidth={420} />
+
+      {/* Main data table */}
       <GeneralInquiriesTable
         data={data}
         setData={setData}
-        role={user_type as "customer" | "supplier"}
-        selectedInquiries={selectedInquiries}
-        setSelectedInquiries={setSelectedInquiries}
+        role={user.businessType ?? "customer"}
       />
     </div>
   );

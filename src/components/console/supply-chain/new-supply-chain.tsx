@@ -125,7 +125,7 @@ export default function NewSupplyChain() {
     try {
       const newPaymentTerms = {
         ...data,
-        userId: user.id!,
+        userId: user._id!,
       };
       // Call the API to add a new supply chain proposal
       const result = await apiCaller(
@@ -314,3 +314,4 @@ export default function NewSupplyChain() {
     </div>
   );
 }
+

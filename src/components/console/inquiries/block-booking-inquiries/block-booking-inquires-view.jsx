@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 
 import apiCaller from "@/lib/apiCaller";
 import {
-  SummaryColumnDef,
   SummaryTable,
 } from "@/components/console/summary-table";
 
@@ -12,15 +11,10 @@ import BBInquiriesTable from "./block-bboking-inquiries-table";
 import { BBInquiry } from "./columns";
 
 // Example row type for the summary data
-interface InquirySummary {
-  postedInq: number;
-  rcvdProp: number;
-  propAccepted: number;
-  contracts: number;
-}
+
 
 // Define summary columns
-const columns: SummaryColumnDef<InquirySummary>[] = [
+const columns= [
   { id: "postedInq", header: "Posted Inq" },
   { id: "rcvdProp", header: "Rcvd Prop" },
   { id: "propAccepted", header: "Prop Accepted" },
@@ -28,15 +22,13 @@ const columns: SummaryColumnDef<InquirySummary>[] = [
 ];
 
 export default function BBInquiriesView() {
-  const [userType, setUserType] = useState<"customer" | "supplier" | null>(
-    null
-  );
-  const [data, setData] = useState<BBInquiry[]>([]);
+  const [userType, setUserType] = useState( null);
+  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // Get user type from localStorage on client side
-    setUserType(localStorage.getItem("user_type") as "customer" | "supplier");
+    setUserType(localStorage.getItem("user_type"));
 
     const fetchData = async () => {
       try {
@@ -65,7 +57,7 @@ export default function BBInquiriesView() {
   }
 
   // Build the summary data based on fetched inquiries
-  const summary: InquirySummary[] = [
+  const summary = [
     {
       postedInq: data.length,
       rcvdProp: 2,

@@ -23,6 +23,6 @@
       "@public/*": ["./public/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/(console)/inquiries/page.jsx", "src/app/(console)/contracts/page.jsx", "src/components/console/summary-table.jsx", "src/components/console/inquiries/block-booking-inquiries/block-booking-inquires-filter.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/(console)/inquiries/page.jsx", "src/app/(console)/contracts/page.jsx", "src/components/console/summary-table.jsx", "src/components/console/inquiries/block-booking-inquiries/block-booking-inquires-filter.jsx", "src/components/console/inquiries/block-booking-inquiries/block-booking-inquires-view.jsx", "src/components/console/inquiries/general-inquiries/general-inquires-view.jsx", "src/components/console/proposals/gn-proposals/bb-proposals-view.jsx", "src/components/console/proposals/bb-proposals/bb-proposals-view.jsx"],
   "exclude": ["node_modules"]
 }

@@ -5,27 +5,17 @@ import { useUserStore } from "@/stores/userStore";
 
 import apiCaller from "@/lib/apiCaller";
 import {
-  SummaryColumnDef,
   SummaryTable,
 } from "@/components/console/summary-table";
 
 import GeneralInquiriesTable from "./bb-proposals-table";
 import { Proposal } from "./columns";
 
-// Example row type
-interface ProposalSummary {
-  totalInq?: number;
-  netQty?: number;
-  repliedInq?: number;
-  postedInq?: number;
-  rcvdProp?: number;
-  propAccepted: number;
-  contracted: number;
-}
+
 
 export default function GNProposalsView() {
   const { user } = useUserStore();
-  const [data, setData] = useState<Proposal[]>([]);
+  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -59,7 +49,7 @@ export default function GNProposalsView() {
   }
 
   // Define columns based on the user business type
-  const columns: SummaryColumnDef<ProposalSummary>[] =
+  const columns =
     user.businessType === "customer"
       ? [
           { id: "postedInq", header: "Posted Inq" },
@@ -76,7 +66,7 @@ export default function GNProposalsView() {
         ];
 
   // Build summary data accordingly
-  const summary: ProposalSummary[] =
+  const summary =
     user.businessType === "customer"
       ? [
           {

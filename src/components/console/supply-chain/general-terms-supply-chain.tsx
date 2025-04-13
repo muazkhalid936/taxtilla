@@ -61,7 +61,7 @@ export default function GeneralTermsSupplyChain() {
     const fetchGeneralTerms = async () => {
       try {
         const result = await apiCaller(
-          `/payment-terms/general/${user?.id}`,
+          `/payment-terms/general/${user?._id}`,
           "GET",
           undefined,
           {},
@@ -90,12 +90,12 @@ export default function GeneralTermsSupplyChain() {
     };
 
     fetchGeneralTerms();
-  }, [user?.id, reset]);
+  }, [user?._id, reset]);
 
   if (!user) return null;
 
   const onSubmit = async (values: FormValues) => {
-    const generalTermData = { ...values, userId: user.id! };
+    const generalTermData = { ...values, userId: user._id! };
 
     try {
       if (isGeneralTermNew || !generalTermId) {
@@ -280,3 +280,4 @@ export default function GeneralTermsSupplyChain() {
     </div>
   );
 }
+
