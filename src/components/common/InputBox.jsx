@@ -1,7 +1,7 @@
 const InputBox = ({ title, placeholder, smallWidth, type }) => {
   return (
     <div
-      className={`relative ${smallWidth===true ? "w-[15vw]" : smallWidth === "20vw" ? "20vw" : "w-[25vw]"}  my-2`}
+      className={`relative min-w-[300px] max-w-[400px] ${smallWidth === true ? "w-[15vw]" : smallWidth === "20vw" ? "20vw" : "w-[25vw]"}  my-2`}
     >
       <label
         htmlFor="contractNo"
