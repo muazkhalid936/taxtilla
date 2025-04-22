@@ -110,7 +110,7 @@ const page = () => {
       <div>Allocations Details</div>
 
       <div className="flex gap-5 mt-10 ">
-        <InputBox title={"Contract No."} placeholder={"Enter here"} />
+        <InputBox title={"Contract No."} placeholder={"Enter here"}  />
         <InputBox title={"Contract Date"} placeholder={"Enter here"} />
       </div>
       <div className="flex gap-5 ">

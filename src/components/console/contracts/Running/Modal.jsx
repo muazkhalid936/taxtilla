@@ -93,7 +93,7 @@ export default function Modal({
             <>
               <button
                 onClick={onClose}
-                className="px-8 py-2 bg-black text-white rounded-lg transition"
+                className={` ${modalType==="adv"?"hidden":"flex"}  px-8 py-2 bg-black text-white rounded-lg transition`}
               >
                 Update
               </button>

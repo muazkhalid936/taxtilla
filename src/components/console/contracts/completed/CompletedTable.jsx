@@ -21,6 +21,50 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { DataTable } from "../../data-table";
 import { getCustomerColumns, getSupplierColumns } from "./columns";
 
+function ViewDropdown({ item }) {
+  const [open, setOpen] = React.useState(false);
+
+  const toggleDropdown = () => setOpen((prev) => !prev);
+
+  // It is often a good idea to close the dropdown when clicking outside;
+  // for brevity, this example only toggles on clicking the button.
+  return (
+    <div className="relative inline-block">
+      <button onClick={toggleDropdown} className="text-blue-600 underline">
+        View
+      </button>
+      {open && (
+        <div className="absolute right-0 top-0 mt-2 w-48 bg-white rounded-md shadow-lg z-[900]">
+          <Link href={`/contracts/ContractDetails`}>
+            <button
+              onClick={() => setOpen(false)}
+              className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+            >
+              Contract Details
+            </button>
+          </Link>
+          <Link href={`/contracts/Delivery-Details/${item.ID}`}>
+            <button
+              onClick={() => setOpen(false)}
+              className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+            >
+              Delivery Details
+            </button>
+          </Link>
+          {/* <Link href={`/contracts/Allocations`}>
+            <button
+              onClick={() => setOpen(false)}
+              className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+            >
+              Allocation
+            </button>
+          </Link> */}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function ContractTable({
   data,
   setData,
@@ -125,10 +169,7 @@ export default function ContractTable({
 
           return (
             <div className="space-x-2">
-              <Link href={`/contracts/Details/${item.ID}`}>
-                <button className="text-blue-600 underline">View</button>
-              </Link>
-            
+              <ViewDropdown item={item} />
 
               {/* {role === "customer" && item.status !== "inquiry_closed" && (
                 <button

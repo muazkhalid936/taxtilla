@@ -152,7 +152,7 @@ export default function ContractsView({
 
   return (
     <div className="space-y-4">
-      <SummaryTable columns={columns} data={summary} maxWidth={720} />
+      <SummaryTable columns={columns} data={summary} maxWidth={620} />
       <ContractsTable
         data={data}
         setData={setData}

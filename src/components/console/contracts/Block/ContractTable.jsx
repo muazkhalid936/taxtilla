@@ -36,7 +36,7 @@ function ViewDropdown({ item }) {
       </button>
       {open && (
         <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10">
-          <Link href={`/contracts/Details/${item.ID}`}>
+          <Link href={`/contracts/Block-Contract-Details`}>
             <button
               onClick={() => setOpen(false)}
               className="block w-full text-left px-4 py-2 hover:bg-gray-100"
@@ -44,7 +44,7 @@ function ViewDropdown({ item }) {
               Contract Details
             </button>
           </Link>
-          <Link href={`/contracts/Allocations`}>
+          <Link href={`/contracts/BlockAllocations`}>
             <button
               onClick={() => setOpen(false)}
               className="block w-full text-left px-4 py-2 hover:bg-gray-100"

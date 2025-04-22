@@ -6,32 +6,39 @@ import { set } from "date-fns";
 import { Trash2 } from "lucide-react";
 
 import { Checkbox } from "@/components/ui/checkbox";
-import Modal from "@/components/console/contracts/Running/Modal"; 
 import ContractsBlockView from "@/components/console/contracts/Block/ContractBlockView";
+import BlockView from "@/components/console/contracts/completed/CompletedView";
 import ContractFilter from "@/components/console/contracts/contracts/ContractFilter";
 import ContractsView from "@/components/console/contracts/contracts/ContractsView";
+import ContractNew from "@/components/console/contracts/New/ContractNewView";
 import ContractRunningView from "@/components/console/contracts/Running/ContractRunningView";
+import Modal from "@/components/console/contracts/Running/Modal";
 import FormTabs from "@/components/console/form-tabs";
 import BlockBookingInquiriesFilter from "@/components/console/inquiries/block-booking-inquiries/block-booking-inquires-filter";
 import BBInquiriesView from "@/components/console/inquiries/block-booking-inquiries/block-booking-inquires-view";
 import NewInquiry from "@/components/console/inquiries/new-inquiry";
-import BlockView from "@/components/console/contracts/completed/CompletedView"
-import ContractNew from "@/components/console/contracts/New/ContractNewView";
+
 export default function ContractPage() {
   const data = Array.from({ length: 10 }).map(() => ({
     so: "11 22 33 44",
     specs: "111 222 333 444",
     conewt: "12-09-24",
     customer: "Joh Doe",
-    specs:"-",
+    specs: "-",
     stock: "200",
     qty: "100",
     disptachReq: "20-2-2025",
     disptach: "20-2-2025",
     todayProduction: "12-09-24",
-    remarks:"Accepted",
-    uploadSo:"Document",
-    soNumber:"11-2-2130"
+    remarks: "Accepted",
+    uploadSo: "Document",
+    soNumber: "11-2-2130",
+    chequeNumber: "123456789",
+    cheque: "1000",
+    chequeDate: "12-09-24",
+    chequeImage: "Document",
+    qtypaid: "100",
+  
   }));
 
   const columns = [
@@ -44,30 +51,60 @@ export default function ContractPage() {
     {
       accessorKey: "so",
       header: "S/O",
-      modalType: ["dispatch", "stock", ""],
+      modalType: ["dispatch", "stock", "adv"],
       cell: (info) => info.getValue(),
     },
     {
       accessorKey: "customer",
-      modalType: ["dispatch","stock"],
+      modalType: ["dispatch", "stock"],
       header: "Customer",
       cell: (info) => info.getValue(),
     },
     {
       accessorKey: "specs",
       header: "Specs",
-      modalType: ["dispatch", "stock", "upload"],
+      modalType: ["dispatch", "stock", "upload", "adv"],
       cell: (info) => info.getValue(),
     },
     {
       accessorKey: "conewt",
       header: "Conewt",
-      modalType: ["stock", "upload"],
+      modalType: ["stock", "upload", "adv"],
+      cell: (info) => info.getValue(),
+    },
+    {
+      accessorKey: "qtypaid",
+      header: "Quantity Paid For",
+      modalType: ["adv"],
+      cell: (info) => info.getValue(),
+    },
+    {
+      accessorKey: "cheque",
+      header: "Cheque Amount",
+      modalType: ["adv"],
+      cell: (info) => info.getValue(),
+    },
+    {
+      accessorKey: "chequeDate",
+      header: "Cheque Date",
+      modalType: ["adv"],
+      cell: (info) => info.getValue(),
+    },
+    {
+      accessorKey: "chequeNumber",
+      header: "Cheque No.",
+      modalType: ["adv"],
+      cell: (info) => info.getValue(),
+    },
+    {
+      accessorKey: "chequeImage",
+      header: "Cheque Image",
+      modalType: ["adv"],
       cell: (info) => info.getValue(),
     },
     {
       accessorKey: "qty",
-    header: "Quantity",
+      header: "Quantity",
       modalType: ["dispatch", "upload"],
       cell: (info) => info.getValue(),
     },
@@ -170,6 +207,19 @@ export default function ContractPage() {
     setModalType("stock");
     setIsModalOpen(!isModalOpen); // Toggle modal
   }
+  function handleMonthlyLifting() {
+
+    router.push("/contracts/MonthlyLifting")
+  }
+  function handleRequest() {
+
+    router.push("/contracts/Request")
+  }
+  function handleAdvPayments() {
+    setTitle("Advance Payments");
+    setModalType("adv");
+    setIsModalOpen(!isModalOpen); // Toggle modal
+  }
   function handleDispatch() {
     setModalType("dispatch");
     setTitle("Enter Dispatch ");
@@ -221,17 +271,17 @@ export default function ContractPage() {
               {
                 label: "Adv Payments",
                 variant: "default",
-                onClick: handleSendProposals,
+                onClick: handleAdvPayments,
               },
               {
                 label: "Monthly Lifting",
                 variant: "default",
-                onClick: handleSendProposals,
+                onClick: handleMonthlyLifting,
               },
               {
                 label: "Request D/O",
                 variant: "default",
-                onClick: handleSendProposals,
+                onClick: handleRequest,
               },
             ]
           : [
@@ -272,7 +322,7 @@ export default function ContractPage() {
               {
                 label: "Monthly Lifting",
                 variant: "default",
-                onClick: handleSendProposals,
+                onClick: handleMonthlyLifting,
               },
               {
                 label: "Request D/O",
@@ -281,7 +331,6 @@ export default function ContractPage() {
               },
             ]
           : [
-            
               {
                 label: "Upload S/O",
                 variant: "default",
@@ -322,10 +371,10 @@ export default function ContractPage() {
       ? baseTabs
       : [
           ...baseTabs,
-          {
-            label: "New",
-            component: <NewInquiry />,
-          },
+          // {
+          //   label: "New",
+          //   component: <NewInquiry />,
+          // },
         ];
 
   return (

@@ -114,7 +114,7 @@ export default function ContractsView({
             close: 1,
           },
           {
-            name: "Orders Booking",
+            name: "Block Booking",
             totalInq: data.length,
             netQty: 10,
             repliedInq: 2,

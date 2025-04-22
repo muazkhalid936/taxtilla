@@ -173,27 +173,27 @@ export const getCustomerColumns = () => {
     {
       id: "ID",
       header: "ID",
-      cell: ({ row }) => row.original.ID ?? "-",
+      cell: ({ row }) => row.original.customerId._id ?? "-",
     },
     {
       id: "po",
       header: "PO",
-      cell: ({ row }) => row.original.PO ?? "-",
+      cell: ({ row }) => row.original.poNumber ?? "-",
     },
     {
       id: "So",
       header: "SO",
       cell: ({ row }) => {
-        const qty = row.original.SO ?? 0;
+        const qty = row.original.soNumber ?? 0;
         const qtyType = row.original.quantityType ?? "";
         return `${qty} ${qtyType}`;
       },
     },
     {
       id: "specifications",
-      header: "Contact No",
+      header: "Contract No",
       cell: ({ row }) => {
-        const specs = row.original.ContractNo ?? "";
+        const specs = row.original.contractNumber ?? "";
         return specs.length > 50
           ? specs.substring(0, 50) + "..."
           : specs || "-";
@@ -203,7 +203,7 @@ export const getCustomerColumns = () => {
       id: "specs",
       header: "Specs",
       cell: ({ row }) => {
-        const specs = row.original.Specs ?? "";
+        const specs = row.original.specs ?? "";
         return specs.length > 50
           ? specs.substring(0, 50) + "..."
           : specs || "-";
@@ -213,17 +213,17 @@ export const getCustomerColumns = () => {
       id: "conewt",
       header: "Cone wt",
       cell: ({ row }) => {
-        const specs = row.original.ConeWT ?? "";
+        const specs = row.original.coneWeight ?? "";
         return specs.length > 50
           ? specs.substring(0, 50) + "..."
           : specs || "-";
       },
     },
     {
-      id: "customer",
-      header: "Customer",
+      id: "supplier",
+      header: "Supplier",
       cell: ({ row }) => {
-        const specs = row.original.Customer ?? "";
+        const specs = row.original.customerId.name ?? "";
         return specs.length > 50
           ? specs.substring(0, 50) + "..."
           : specs || "-";
@@ -233,7 +233,7 @@ export const getCustomerColumns = () => {
       id: "rate",
       header: "Rate",
       cell: ({ row }) => {
-        const specs = row.original.Rate ?? "";
+        const specs = row.original.rate ?? "";
         return specs.length > 50
           ? specs.substring(0, 50) + "..."
           : specs || "-";
@@ -242,7 +242,7 @@ export const getCustomerColumns = () => {
       id: "quantity",
       header: "Quantity",
       cell: ({ row }) => {
-        const specs = row.original.Quantity ?? "";
+        const specs = row.original.quantity ?? "";
         return specs.length > 50
           ? specs.substring(0, 50) + "..."
           : specs || "-";
@@ -251,7 +251,7 @@ export const getCustomerColumns = () => {
       id: "balance",
       header: "Balance",
       cell: ({ row }) => {
-        const specs = row.original.Balance ?? "";
+        const specs = row.original.balance ?? "";
         return specs.length > 50
           ? specs.substring(0, 50) + "..."
           : specs || "-";
@@ -260,22 +260,22 @@ export const getCustomerColumns = () => {
     {
       id: "deliveryStartDate",
       header: "Start Date",
-      cell: ({ row }) => row.original.StartDate ?? "-",
+      // cell: ({ row }) => row.original.startDate ?? "-",
 
-      // cell: ({ row }) =>
-      //   row.original.StartDate
-      //     ? new Date(row.original.deliveryStartDate).toLocaleDateString()
-      //     : "-",
+      cell: ({ row }) =>
+        row.original.startDate
+          ? new Date(row.original.startDate).toLocaleDateString()
+          : "-",
     },
     {
       id: "deliveryEndDate",
       header: "End Date",
-      cell: ({ row }) => row.original.EndDate ?? "-",
+      // cell: ({ row }) => row.original.endDate ?? "-",
 
-      // cell: ({ row }) =>
-      //   row.original.EndDate
-      //     ? new Date(row.original.deliveryEndDate).toLocaleDateString()
-      //     : "-",
+      cell: ({ row }) =>
+        row.original.endDate
+          ? new Date(row.original.endDate).toLocaleDateString()
+          : "-",
     },
     {
       id: "paymentTerms",
@@ -289,13 +289,13 @@ export const getCustomerColumns = () => {
     },
     {
       id: "shipmentTerms",
-      header: "Aging",
-      cell: ({ row }) => row.original.Aging ?? "-",
+      header: "Aging/Delay",
+      cell: ({ row }) => row.original.aging ?? "-",
     },
     {
       id: "businessCondition",
       header: "Status",
-      cell: ({ row }) => row.original.Status ?? "-",
+      cell: ({ row }) => row.original.status ?? "-",
     },
     ...baseColumns,
   ];

@@ -125,7 +125,7 @@ export default function ContractTable({
 
           return (
             <div className="space-x-2">
-              <Link href={`/contracts/Details/${item.ID}`}>
+              <Link href={`/contracts/ContractDetails/`}>
                 <button className="text-blue-600 underline">View</button>
               </Link>
               <button

@@ -95,6 +95,7 @@ export default function GeneralTermsSupplyChain() {
   if (!user) return null;
 
   const onSubmit = async (values: FormValues) => {
+    if (!user) return;
     const generalTermData = { ...values, userId: user._id! };
 
     try {

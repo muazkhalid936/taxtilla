@@ -21,6 +21,50 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { DataTable } from "../../data-table";
 import { getCustomerColumns, getSupplierColumns } from "./columns";
 
+function ViewDropdown({ item }) {
+  const [open, setOpen] = React.useState(false);
+
+  const toggleDropdown = () => setOpen((prev) => !prev);
+
+  // It is often a good idea to close the dropdown when clicking outside;
+  // for brevity, this example only toggles on clicking the button.
+  return (
+    <div className="relative inline-block">
+      <button onClick={toggleDropdown} className="text-blue-600 underline">
+        View
+      </button>
+      {open && (
+        <div className="absolute right-0 top-0 mt-2 w-48 bg-white rounded-md shadow-lg z-[900]">
+          <Link href={`/contracts/ContractDetails`}>
+            <button
+              onClick={() => setOpen(false)}
+              className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+            >
+              Contract Details
+            </button>
+          </Link>
+          <Link href={`/contracts/Delivery-Details/${item.ID}`}>
+            <button
+              onClick={() => setOpen(false)}
+              className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+            >
+              Delivery Details
+            </button>
+          </Link>
+          <Link href={`/contracts/Allocations`}>
+            <button
+              onClick={() => setOpen(false)}
+              className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+            >
+              Allocation
+            </button>
+          </Link>
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function ContractTable({
   data,
   setData,
@@ -125,9 +169,8 @@ export default function ContractTable({
 
           return (
             <div className="space-x-2">
-              <Link href={`/contracts/Details/${item._id}`}>
-                <button className="text-blue-600 underline">View</button>
-              </Link>
+              <ViewDropdown item={item} />
+
               <Link href={viewUrl}>
                 <button className="text-blue-600 underline">Cancel</button>
               </Link>
@@ -175,39 +218,70 @@ export default function ContractTable({
           <DialogHeader>
             <DialogTitle>Close Inquiry</DialogTitle>
             <DialogDescription>
-              Are you sure you want to close this inquiry? This action cannot be undone.
+              Are you sure you want to close this inquiry? This action cannot be
+              undone.
             </DialogDescription>
           </DialogHeader>
 
           <div className="py-4">
             <RadioGroup value={closeReason} onValueChange={setCloseReason}>
               <div className="flex items-center space-x-2 py-2">
-                <RadioGroupItem value="target_date_not_met" id="target_date_not_met" />
-                <Label htmlFor="target_date_not_met">Target Date not met.</Label>
+                <RadioGroupItem
+                  value="target_date_not_met"
+                  id="target_date_not_met"
+                />
+                <Label htmlFor="target_date_not_met">
+                  Target Date not met.
+                </Label>
               </div>
               <div className="flex items-center space-x-2 py-2">
-                <RadioGroupItem value="target_rate_not_met" id="target_rate_not_met" />
-                <Label htmlFor="target_rate_not_met">Target rate not met.</Label>
+                <RadioGroupItem
+                  value="target_rate_not_met"
+                  id="target_rate_not_met"
+                />
+                <Label htmlFor="target_rate_not_met">
+                  Target rate not met.
+                </Label>
               </div>
               <div className="flex items-center space-x-2 py-2">
-                <RadioGroupItem value="target_payment_terms_not_met" id="target_payment_terms_not_met" />
-                <Label htmlFor="target_payment_terms_not_met">Target Payment Terms not met.</Label>
+                <RadioGroupItem
+                  value="target_payment_terms_not_met"
+                  id="target_payment_terms_not_met"
+                />
+                <Label htmlFor="target_payment_terms_not_met">
+                  Target Payment Terms not met.
+                </Label>
               </div>
               <div className="flex items-center space-x-2 py-2">
-                <RadioGroupItem value="target_quality_not_met" id="target_quality_not_met" />
-                <Label htmlFor="target_quality_not_met">Target Quality not met.</Label>
+                <RadioGroupItem
+                  value="target_quality_not_met"
+                  id="target_quality_not_met"
+                />
+                <Label htmlFor="target_quality_not_met">
+                  Target Quality not met.
+                </Label>
               </div>
               <div className="flex items-center space-x-2 py-2">
-                <RadioGroupItem value="target_date_not_met_2" id="target_date_not_met_2" />
-                <Label htmlFor="target_date_not_met_2">Target Date not met.</Label>
+                <RadioGroupItem
+                  value="target_date_not_met_2"
+                  id="target_date_not_met_2"
+                />
+                <Label htmlFor="target_date_not_met_2">
+                  Target Date not met.
+                </Label>
               </div>
               <div className="flex items-center space-x-2 py-2">
                 <RadioGroupItem value="order_cancelled" id="order_cancelled" />
                 <Label htmlFor="order_cancelled">My order was cancelled.</Label>
               </div>
               <div className="flex items-center space-x-2 py-2">
-                <RadioGroupItem value="wrong_specifications" id="wrong_specifications" />
-                <Label htmlFor="wrong_specifications">Posted wrong specifications by mistake</Label>
+                <RadioGroupItem
+                  value="wrong_specifications"
+                  id="wrong_specifications"
+                />
+                <Label htmlFor="wrong_specifications">
+                  Posted wrong specifications by mistake
+                </Label>
               </div>
             </RadioGroup>
           </div>
@@ -225,3 +299,4 @@ export default function ContractTable({
     </div>
   );
 }
+

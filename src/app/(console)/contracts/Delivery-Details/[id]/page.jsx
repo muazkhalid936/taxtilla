@@ -59,10 +59,10 @@ const ContractDetails = () => {
 
   const summary = [
     {
-      so: data.so,
-      specs: data.specs,
-      customer: data.Customer,
-      qty: data.quantity,
+      so: "1122",
+      specs: "lorem ipsum dolor sit amet",
+      customer: "Ali",
+      qty: 100,
     },
   ];
 
